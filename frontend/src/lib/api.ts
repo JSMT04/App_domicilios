@@ -81,6 +81,8 @@ export const menuApi = {
 // ─── Orders ───────────────────────────────────────────────────────────────────
 
 export const ordersApi = {
+  create: (token: string, data: any) =>
+    apiFetch<any>('/orders', { method: 'POST', body: JSON.stringify(data), token }),
   getAll: (token: string) => apiFetch<any[]>('/orders', { token }),
   getById: (token: string, id: string) => apiFetch<any>(`/orders/${id}`, { token }),
   updateStatus: (token: string, id: string, status: string) =>

@@ -3,10 +3,10 @@
 import { useState, FormEvent } from 'react';
 import { authApi } from '@/lib/api';
 
-const DEMO_ACCOUNTS = [
-  { role: 'RESTAURANTE', label: '🍽️ Restaurante Demo', email: 'restaurante@demo.com', desc: 'Gestiona pedidos, menú y métricas' },
-  { role: 'REPARTIDOR',  label: '🛵 Repartidor Demo',  email: 'repartidor@demo.com',  desc: 'Pedidos asignados y tracking GPS' },
-  { role: 'CLIENTE',      label: '👤 Cliente Demo',     email: 'cliente@demo.com',      desc: 'Historial de compras y seguimiento' },
+const QUICK_ACCOUNTS = [
+  { role: 'RESTAURANTE', label: '🍽️ Restaurante', email: 'restaurante@demo.com', desc: 'Gestiona pedidos, menú y métricas' },
+  { role: 'REPARTIDOR',  label: '🛵 Repartidor',  email: 'repartidor@demo.com',  desc: 'Pedidos asignados y tracking GPS' },
+  { role: 'CLIENTE',      label: '👤 Cliente',     email: 'cliente@demo.com',      desc: 'Historial de compras y pedidos' },
 ];
 
 export default function LoginPage() {
@@ -23,8 +23,8 @@ export default function LoginPage() {
   const [phone, setPhone] = useState('');
   const [role, setRole] = useState('RESTAURANTE');
 
-  function selectDemoAccount(demoEmail: string) {
-    setEmail(demoEmail);
+  function selectAccount(targetEmail: string) {
+    setEmail(targetEmail);
     setPassword('rapipedido123');
     setError('');
   }
@@ -68,11 +68,10 @@ export default function LoginPage() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#0a0d17',
+        backgroundColor: '#0b1120',
         backgroundImage: `
-          radial-gradient(circle at 15% 30%, rgba(139, 92, 246, 0.22) 0%, transparent 45%),
-          radial-gradient(circle at 85% 75%, rgba(20, 184, 166, 0.16) 0%, transparent 45%),
-          radial-gradient(circle at 50% 10%, rgba(59, 130, 246, 0.12) 0%, transparent 50%)
+          radial-gradient(circle at 10% 20%, rgba(249, 115, 22, 0.08) 0%, transparent 40%),
+          radial-gradient(circle at 90% 80%, rgba(2, 132, 199, 0.08) 0%, transparent 40%)
         `,
         padding: '2rem 1rem',
       }}
@@ -81,12 +80,12 @@ export default function LoginPage() {
         className="glass-card animate-fade-in-up"
         style={{
           width: '100%',
-          maxWidth: '460px',
+          maxWidth: '450px',
           padding: '2.5rem',
-          backgroundColor: '#121627',
-          border: '1.5px solid rgba(139, 92, 246, 0.35)',
-          borderRadius: '1.25rem',
-          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 35px rgba(139, 92, 246, 0.12)',
+          backgroundColor: '#1e293b',
+          border: '1px solid #334155',
+          borderRadius: '1rem',
+          boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.5)',
         }}
       >
         {/* Brand Header */}
@@ -96,52 +95,52 @@ export default function LoginPage() {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '64px',
-              height: '64px',
-              borderRadius: '20px',
-              background: 'linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%)',
-              fontSize: '2rem',
-              marginBottom: '1rem',
-              boxShadow: '0 10px 30px rgba(139, 92, 246, 0.5)',
+              width: '56px',
+              height: '56px',
+              borderRadius: '14px',
+              background: 'linear-gradient(135deg, #ea580c 0%, #f97316 100%)',
+              fontSize: '1.8rem',
+              marginBottom: '0.85rem',
+              boxShadow: '0 4px 14px rgba(234, 88, 12, 0.35)',
             }}
           >
             🛵
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '0.35rem' }}>
-            <span className="gradient-text">RapiPedido</span>
+          <h1 style={{ fontSize: '1.65rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em', marginBottom: '0.25rem' }}>
+            Rapi<span style={{ color: '#f97316' }}>Pedido</span>
           </h1>
-          <p style={{ color: '#cbd5e1', fontSize: '0.9rem', fontWeight: 500 }}>
-            Plataforma de Domicilios en Tiempo Real
+          <p style={{ color: '#94a3b8', fontSize: '0.875rem', fontWeight: 500 }}>
+            Plataforma de Domicilios y Gestión en Tiempo Real
           </p>
         </div>
 
-        {/* Demo Accounts Quick Picker */}
+        {/* Quick Accounts Picker */}
         <div
           style={{
-            background: 'rgba(21, 26, 44, 0.85)',
-            border: '1px solid #2a3450',
+            background: '#0f172a',
+            border: '1px solid #334155',
             borderRadius: '0.75rem',
             padding: '0.85rem',
             marginBottom: '1.5rem',
           }}
         >
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-            <span>⚡</span> Cuentas de Prueba (1 Clic):
+          <div style={{ fontSize: '0.72rem', fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <span>⚡</span> Cuentas de prueba:
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
-            {DEMO_ACCOUNTS.map((acc) => {
+            {QUICK_ACCOUNTS.map((acc) => {
               const isSelected = email === acc.email;
               return (
                 <button
                   key={acc.role}
                   type="button"
-                  onClick={() => selectDemoAccount(acc.email)}
+                  onClick={() => selectAccount(acc.email)}
                   style={{
                     padding: '0.5rem 0.25rem',
                     borderRadius: '0.5rem',
-                    border: isSelected ? '1.5px solid #8b5cf6' : '1px solid #333d59',
-                    background: isSelected ? 'rgba(139, 92, 246, 0.25)' : '#181d2f',
-                    color: isSelected ? '#ffffff' : '#cbd5e1',
+                    border: isSelected ? '1.5px solid #f97316' : '1px solid #334155',
+                    background: isSelected ? 'rgba(249, 115, 22, 0.15)' : '#1e293b',
+                    color: isSelected ? '#f97316' : '#cbd5e1',
                     fontSize: '0.75rem',
                     fontWeight: 600,
                     cursor: 'pointer',
@@ -161,10 +160,10 @@ export default function LoginPage() {
         <div
           style={{
             display: 'flex',
-            background: '#181d2f',
-            border: '1px solid #2d3652',
-            borderRadius: '0.75rem',
-            padding: '4px',
+            background: '#0f172a',
+            border: '1px solid #334155',
+            borderRadius: '0.625rem',
+            padding: '3px',
             marginBottom: '1.75rem',
           }}
         >
@@ -176,18 +175,16 @@ export default function LoginPage() {
                 onClick={() => { setTab(t); setError(''); }}
                 style={{
                   flex: 1,
-                  padding: '0.65rem 0.5rem',
+                  padding: '0.6rem 0.5rem',
                   borderRadius: '0.5rem',
                   border: 'none',
                   cursor: 'pointer',
                   fontWeight: 700,
-                  fontSize: '0.875rem',
+                  fontSize: '0.85rem',
                   transition: 'all 0.2s',
-                  background: active
-                    ? 'linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%)'
-                    : 'transparent',
+                  background: active ? '#f97316' : 'transparent',
                   color: active ? '#ffffff' : '#94a3b8',
-                  boxShadow: active ? '0 4px 12px rgba(139, 92, 246, 0.4)' : 'none',
+                  boxShadow: active ? '0 2px 8px rgba(249, 115, 22, 0.35)' : 'none',
                 }}
               >
                 {t === 'login' ? 'Iniciar Sesión' : 'Registrarse'}
@@ -201,9 +198,9 @@ export default function LoginPage() {
           <div
             style={{
               padding: '0.75rem 1rem',
-              borderRadius: '0.625rem',
-              background: 'rgba(239, 68, 68, 0.18)',
-              border: '1.5px solid rgba(239, 68, 68, 0.45)',
+              borderRadius: '0.5rem',
+              background: 'rgba(239, 68, 68, 0.12)',
+              border: '1px solid rgba(239, 68, 68, 0.35)',
               color: '#fca5a5',
               fontSize: '0.85rem',
               fontWeight: 600,
@@ -227,7 +224,7 @@ export default function LoginPage() {
                 style={{
                   fontSize: '0.85rem',
                   fontWeight: 700,
-                  color: '#f1f5f9',
+                  color: '#ffffff',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.35rem',
@@ -253,7 +250,7 @@ export default function LoginPage() {
                 style={{
                   fontSize: '0.85rem',
                   fontWeight: 700,
-                  color: '#f1f5f9',
+                  color: '#ffffff',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.35rem',
@@ -301,7 +298,7 @@ export default function LoginPage() {
               ) : (
                 '🚀'
               )}
-              {loading ? 'Ingresando al sistema...' : 'Ingresar al Panel'}
+              {loading ? 'Ingresando al panel...' : 'Ingresar al Panel'}
             </button>
           </form>
         )}
@@ -312,7 +309,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="reg-name"
-                style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f1f5f9', display: 'block', marginBottom: '0.4rem' }}
+                style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', display: 'block', marginBottom: '0.4rem' }}
               >
                 Nombre Completo
               </label>
@@ -330,7 +327,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="reg-email"
-                style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f1f5f9', display: 'block', marginBottom: '0.4rem' }}
+                style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', display: 'block', marginBottom: '0.4rem' }}
               >
                 Correo Electrónico
               </label>
@@ -348,7 +345,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="reg-phone"
-                style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f1f5f9', display: 'block', marginBottom: '0.4rem' }}
+                style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', display: 'block', marginBottom: '0.4rem' }}
               >
                 Teléfono (WhatsApp)
               </label>
@@ -365,7 +362,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="reg-password"
-                style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f1f5f9', display: 'block', marginBottom: '0.4rem' }}
+                style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', display: 'block', marginBottom: '0.4rem' }}
               >
                 Contraseña
               </label>
@@ -384,7 +381,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="reg-role"
-                style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f1f5f9', display: 'block', marginBottom: '0.4rem' }}
+                style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', display: 'block', marginBottom: '0.4rem' }}
               >
                 Tipo de Cuenta
               </label>
@@ -395,7 +392,7 @@ export default function LoginPage() {
                 onChange={(e) => setRole(e.target.value)}
                 style={{ cursor: 'pointer' }}
               >
-                <option value="RESTAURANTE">🍽️ Restaurante (Gestión de local y pedidos)</option>
+                <option value="RESTAURANTE">🍽️ Restaurante (Gestión de local, menú y pedidos)</option>
                 <option value="REPARTIDOR">🛵 Repartidor (Entregas y tracking GPS)</option>
                 <option value="CLIENTE">👤 Cliente (Realizar pedidos)</option>
               </select>

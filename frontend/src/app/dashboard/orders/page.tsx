@@ -88,9 +88,9 @@ export default function OrdersPage() {
                 padding: '0.35rem 0.75rem',
                 borderRadius: '999px',
                 border: '1px solid',
-                borderColor: filterStatus === s ? 'var(--color-brand-violet)' : 'rgba(148,163,184,0.15)',
-                background: filterStatus === s ? 'rgba(124,58,237,0.15)' : 'transparent',
-                color: filterStatus === s ? 'var(--color-brand-violet-light)' : 'var(--color-text-muted)',
+                borderColor: filterStatus === s ? '#f97316' : '#334155',
+                background: filterStatus === s ? '#f97316' : '#1e293b',
+                color: filterStatus === s ? '#ffffff' : '#94a3b8',
                 fontSize: '0.78rem',
                 fontWeight: 600,
                 cursor: 'pointer',
@@ -104,12 +104,12 @@ export default function OrdersPage() {
 
         {loading ? (
           <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="animate-spin" style={{ width: '2.5rem', height: '2.5rem', border: '3px solid var(--color-surface-500)', borderTopColor: 'var(--color-brand-violet)', borderRadius: '50%' }} />
+            <div className="animate-spin" style={{ width: '2.5rem', height: '2.5rem', border: '3px solid #334155', borderTopColor: '#f97316', borderRadius: '50%' }} />
           </div>
         ) : (
           <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingRight: '0.5rem' }}>
             {filtered.length === 0 ? (
-              <div className="glass-card" style={{ padding: '3rem', textAlign: 'center', color: 'var(--color-text-muted)' }}>
+              <div className="glass-card" style={{ padding: '3rem', textAlign: 'center', color: '#94a3b8' }}>
                 <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>📭</div>
                 <p>No hay pedidos en este estado</p>
               </div>
@@ -123,22 +123,23 @@ export default function OrdersPage() {
                   cursor: 'pointer',
                   transition: 'all 0.2s',
                   border: selected?.id === order.id
-                    ? '1px solid var(--color-brand-violet)'
-                    : '1px solid rgba(124,58,237,0.12)',
+                    ? '1.5px solid #f97316'
+                    : '1px solid #334155',
+                  background: selected?.id === order.id ? '#1e293b' : '#0f172a',
                   transform: selected?.id === order.id ? 'translateX(3px)' : 'none',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                  <span style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: 'var(--color-brand-violet-light)', fontWeight: 700 }}>
+                  <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: '#38bdf8', fontWeight: 700 }}>
                     {order.orderNumber}
                   </span>
                   <span className={`badge badge-${order.status.toLowerCase()}`}>{order.status}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-secondary)' }}>
-                    👤 {order.customer?.name || '—'}
+                  <span style={{ fontSize: '0.85rem', color: '#cbd5e1' }}>
+                    👤 {order.customer?.name || 'Cliente'}
                   </span>
-                  <span style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--color-brand-teal)' }}>
+                  <span style={{ fontSize: '0.9rem', fontWeight: 800, color: '#f97316' }}>
                     ${Number(order.total).toLocaleString('es-CO')}
                   </span>
                 </div>
@@ -190,17 +191,17 @@ export default function OrdersPage() {
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
                           fontSize: '0.65rem', fontWeight: 700, flexShrink: 0,
                           background: isCurrent
-                            ? 'linear-gradient(135deg, var(--color-brand-violet), var(--color-brand-blue))'
-                            : isPast ? 'var(--color-success)' : 'var(--color-surface-600)',
+                            ? 'linear-gradient(135deg, #ea580c, #f97316)'
+                            : isPast ? '#10b981' : '#334155',
                           color: '#fff',
-                          boxShadow: isCurrent ? '0 0 0 4px rgba(124,58,237,0.3)' : 'none',
+                          boxShadow: isCurrent ? '0 0 0 4px rgba(249,115,22,0.3)' : 'none',
                           transition: 'all 0.3s',
                         }}
                       >
                         {isPast ? '✓' : i + 1}
                       </div>
                       {i < STATUS_FLOW.length - 1 && (
-                        <div style={{ flex: 1, height: '2px', background: isPast ? 'var(--color-success)' : 'var(--color-surface-600)', transition: 'background 0.3s' }} />
+                        <div style={{ flex: 1, height: '2px', background: isPast ? '#10b981' : '#334155', transition: 'background 0.3s' }} />
                       )}
                     </div>
                   );
