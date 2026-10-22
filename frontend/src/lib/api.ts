@@ -14,13 +14,16 @@ async function apiFetch<T>(endpoint: string, options: RequestOptions = {}): Prom
   };
 
   const res = await fetch(`${API_BASE}${endpoint}`, { ...fetchOptions, headers });
-  const json = await res.json();
+  const json = await res.json().catch(() => ({}));
 
   if (!res.ok) {
-    throw new Error(json.message || `API error ${res.status}`);
+    const errorMsg = Array.isArray(json.message)
+      ? json.message.join(', ')
+      : json.message || `API error ${res.status}`;
+    throw new Error(errorMsg);
   }
 
-  return json.data as T;
+  return (json.data !== undefined ? json.data : json) as T;
 }
 
 // ─── Auth ────────────────────────────────────────────────────────────────────
