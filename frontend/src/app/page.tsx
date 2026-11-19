@@ -39,6 +39,7 @@ export default function LoginPage() {
       localStorage.setItem('rp_user', JSON.stringify(res.user));
       window.location.href = '/dashboard';
     } catch (err: any) {
+      // If still fails (e.g. wrong credentials in real backend), show friendly message
       setError(err.message || 'Error al iniciar sesión');
     } finally {
       setLoading(false);

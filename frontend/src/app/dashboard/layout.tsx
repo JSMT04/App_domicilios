@@ -198,6 +198,7 @@ function Sidebar({ user }: { user: any }) {
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<any>(null);
+  const [isDemoMode, setIsDemoMode] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('rp_token');
@@ -207,25 +208,50 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       return;
     }
     if (userData) setUser(JSON.parse(userData));
+    // Detect demo/mock mode by token prefix
+    if (token?.startsWith('mock-token-')) setIsDemoMode(true);
   }, []);
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: '#0b1120' }}>
       <Sidebar user={user} />
-      <main
-        style={{
-          flex: 1,
-          padding: '2.25rem',
-          overflowY: 'auto',
-          backgroundColor: '#0b1120',
-          backgroundImage: `
-            radial-gradient(circle at 90% 10%, rgba(249, 115, 22, 0.04) 0%, transparent 40%),
-            radial-gradient(circle at 10% 90%, rgba(2, 132, 199, 0.04) 0%, transparent 40%)
-          `,
-        }}
-      >
-        {children}
-      </main>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+        {/* Demo Mode Banner */}
+        {isDemoMode && (
+          <div
+            style={{
+              background: 'linear-gradient(90deg, rgba(249,115,22,0.15) 0%, rgba(2,132,199,0.15) 100%)',
+              borderBottom: '1px solid rgba(249,115,22,0.3)',
+              padding: '0.5rem 1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.6rem',
+              fontSize: '0.8rem',
+              color: '#f97316',
+              fontWeight: 600,
+            }}
+          >
+            <span>🧪</span>
+            <span>
+              <strong>Modo Demo</strong> — Backend no disponible. Todos los datos son simulados y se guardan localmente en tu navegador.
+            </span>
+          </div>
+        )}
+        <main
+          style={{
+            flex: 1,
+            padding: '2.25rem',
+            overflowY: 'auto',
+            backgroundColor: '#0b1120',
+            backgroundImage: `
+              radial-gradient(circle at 90% 10%, rgba(249, 115, 22, 0.04) 0%, transparent 40%),
+              radial-gradient(circle at 10% 90%, rgba(2, 132, 199, 0.04) 0%, transparent 40%)
+            `,
+          }}
+        >
+          {children}
+        </main>
+      </div>
     </div>
   );
 }
