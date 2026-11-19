@@ -4,6 +4,17 @@
 
 ---
 
+## 🌐 Demo en Producción
+
+| | Enlace |
+|---|---|
+| **Frontend (Vercel)** | 🔗 **https://frontend-flax-iota-nzhs78te9p.vercel.app** |
+| **Panel Web** | Accede con cualquiera de las [cuentas de prueba](#-credenciales-de-acceso-de-prueba) |
+
+> Desplegado automáticamente con [Vercel CLI](https://vercel.com) — Next.js 14 en producción.
+
+---
+
 ## 🚀 Actualizaciones Recientes del Producto
 
 - **🎨 Nueva Colorimetría Food Delivery SaaS**: Rediseño visual enfocado en legibilidad profesional y alto contraste (paleta en grises pizarra `#0f172a`, `#1e293b`, tipografía en blanco puro `#ffffff`, naranja delivery vibrante `#f97316` y azul corporativo `#0284c7`).
